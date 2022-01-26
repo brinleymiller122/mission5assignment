@@ -18,6 +18,7 @@ namespace MovieSite.Models
         protected override void OnModelCreating(ModelBuilder mb)
         {
             mb.Entity<MovieModel>().HasData(
+                //Seed movies
                 new MovieModel
                 {
                     MovieId = 1,

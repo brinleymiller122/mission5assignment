@@ -25,6 +25,7 @@ namespace MovieSite.Controllers
             return View();
         }
 
+        //My podcasts Action Result
         public IActionResult MyPodcasts()
         {
             return View();
@@ -37,8 +38,7 @@ namespace MovieSite.Controllers
         }
 
         [HttpPost]
-
-        
+        //pass information about movie
         public IActionResult MovieForm(MovieModel mm)
         {
             if (ModelState.IsValid)

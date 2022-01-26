@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace MovieSite.Models
 {
     public class MovieModel
+        //have the same as inputs in form
     {
         [Key]
         [Required]
