@@ -13,18 +13,28 @@
 
 <div>
     <form method="post">
+        <label asp-for="CategoryId">Category:</label>
+        <select asp-for="CategoryId">
+            <!--create drop down for categories-->
+            <option value="" >Select a Category</option>
+            @foreach (Category c in ViewBag.Categories)
+            {
+                <option value="@c.CategoryId">@c.CategoryName</option>
+            }
+         </select><br />
+
         <label asp-for="Title">Movie Title:</label>
         <input asp-for="Title" /><br />
 
         <label asp-for="Year">Year Released:</label>
-        <input asp-for="Year" /><br />
+        <input asp-for="Year"/><br />
 
         <label asp-for="Director">Director:</label>
         <input asp-for="Director" /><br />
 
         <label asp-for="Rating">Rating:</label>
         <select asp-for="Rating">
-            <option value=""></option>
+            <option value="">Select Rating</option>
             <option value="G">G</option>
             <option value="PG">PG</option>
             <option value="PG-13">PG-13</option>
@@ -33,9 +43,9 @@
 
         <label asp-for="Edited">Edited:</label>
         <select asp-for="Edited">
-            <option value=""></option>
-            <option value="true">Yes</option>
             <option value="false">No</option>
+            <option value="true">Yes</option>
+
         </select><br />
 
         <label asp-for="LentTo">Lent To:</label>
@@ -45,7 +55,8 @@
         <input asp-for="Notes" /><br />
 
         <button type="submit">Submit Movie</button>
-
+        
+        <!--Validation-->
         <div id="summary" asp-validation-summary="All"></div>
     </form>
 </div>

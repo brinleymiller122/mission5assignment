@@ -8,8 +8,8 @@ using MovieSite.Models;
 namespace MovieSite.Migrations
 {
     [DbContext(typeof(MovieFormsContext))]
-    [Migration("20220126220826_initials")]
-    partial class initials
+    [Migration("20220201224201_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,10 +17,59 @@ namespace MovieSite.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.22");
 
+            modelBuilder.Entity("MovieSite.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Action/Adventure"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Drama"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "Family"
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            CategoryName = "Horror/Suspense"
+                        },
+                        new
+                        {
+                            CategoryId = 6,
+                            CategoryName = "Television"
+                        });
+                });
+
             modelBuilder.Entity("MovieSite.Models.MovieModel", b =>
                 {
                     b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CategoryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
@@ -50,12 +99,15 @@ namespace MovieSite.Migrations
 
                     b.HasKey("MovieId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Responses");
 
                     b.HasData(
                         new
                         {
                             MovieId = 1,
+                            CategoryId = 1,
                             Director = "Shawn Levy",
                             Edited = false,
                             Notes = "Ryan Reynolds is the best ever...",
@@ -66,6 +118,7 @@ namespace MovieSite.Migrations
                         new
                         {
                             MovieId = 2,
+                            CategoryId = 2,
                             Director = "Taika Waititi",
                             Edited = false,
                             Notes = "Powerful",
@@ -76,6 +129,7 @@ namespace MovieSite.Migrations
                         new
                         {
                             MovieId = 3,
+                            CategoryId = 3,
                             Director = "Jared Hess",
                             Edited = false,
                             Notes = "Hilarious",
@@ -83,6 +137,15 @@ namespace MovieSite.Migrations
                             Title = "Napoleon Dynamite",
                             Year = 2004
                         });
+                });
+
+            modelBuilder.Entity("MovieSite.Models.MovieModel", b =>
+                {
+                    b.HasOne("MovieSite.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

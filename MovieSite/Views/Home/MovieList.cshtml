@@ -1,0 +1,46 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Movie List";
+}
+
+@model List<MovieModel>
+
+<!--Create a movie list/table-->
+<table class="table table-bordered table-striped">
+    <thead class="font-weight-bold thead-dark">
+        <tr>
+            <td>Category</td>
+            <td>Title</td>
+            <td>Year</td>
+            <td>Director</td>
+            <td>Rating</td>
+            <td>Edited</td>
+            <td>Lent To</td>
+            <td>Notes</td>
+            <td>Edit</td>
+            <td>Delete</td>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var x in Model)
+            {
+                <tr>
+                    <td>@x.Category.CategoryName</td>
+                    <td>@x.Title</td>
+                    <td>@x.Year</td>
+                    <td>@x.Director</td>
+                    <td>@x.Rating</td>
+                    <td>@x.Edited</td>
+                    <td>@x.LentTo</td>
+                    <td>@x.Notes</td>
+
+                    <!--links to edit and delete-->
+                    <td> <a asp-controller="Home" asp-action="Edit" asp-route-movieid="@x.MovieId">Edit</a></td>
+                    <td> <a asp-controller="Home" asp-action="Delete" asp-route-movieid="@x.MovieId">Delete</a></td>
+                </tr>
+            } 
+    </tbody>
+</table>
